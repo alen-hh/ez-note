@@ -1,0 +1,43 @@
+{
+  "name": "ez-note",
+  "displayName": "Ez Note",
+  "version": "2.0.0",
+  "description": "A clean, minimal Chrome extension for quick note-taking with a global sidebar that works across all tabs.",
+  "author": "Alen Hu <huhaoyue0220@126.com>",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "@icon-park/react": "^1.4.2",
+    "@plasmohq/storage": "^1.15.0",
+    "plasmo": "0.90.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@types/chrome": "0.0.258",
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "prettier": "3.2.4",
+    "typescript": "5.3.3"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://*/*",
+      "http://*/*"
+    ],
+    "permissions": [
+      "storage",
+      "tabs"
+    ],
+    "commands": {
+      "toggle-sidebar": {
+        "description": "Toggle Ez Note sidebar"
+      }
+    }
+  }
+}
