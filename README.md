@@ -2,7 +2,7 @@
 
 A clean, minimal Chrome extension for quick note-taking with a global sidebar that works across all tabs.
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.0.1-blue.svg)
 ![Manifest](https://img.shields.io/badge/manifest-v3-green.svg)
 
 ## ✨ Features
@@ -128,9 +128,11 @@ ez-note/
 
 ## 📝 Version History
 
-### v2.0.0 (Current)
+### v2.0.1 (Current)
 - Migrated to Tailwind CSS for styling
 - Added auto-focus on textarea when sidebar opens
+
+### v2.0.0
 - Global sidebar with smooth animations
 - Auto-save functionality
 - Copy to clipboard
