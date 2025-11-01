@@ -8,6 +8,7 @@ A clean, minimal Chrome extension for quick note-taking with a global sidebar th
 ## ✨ Features
 
 - **🎯 Global Sidebar** - Persistent note-taking sidebar accessible on any webpage
+- **✍️ Auto-Focus** - Cursor focuses on the textarea when the sidebar opens
 - **💾 Auto-Save** - Notes automatically save to Chrome local storage
 - **📋 Quick Copy** - One-click copy to clipboard with visual feedback
 - **📥 Export** - Export notes as timestamped `.txt` files
@@ -99,6 +100,7 @@ The production build will be in `build/chrome-mv3-prod/`.
 - **Framework**: [Plasmo](https://www.plasmo.com/)
 - **Language**: TypeScript
 - **UI Library**: React 18
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Icons**: [@icon-park/react](https://iconpark.oceanengine.com/)
 - **Storage**: [@plasmohq/storage](https://docs.plasmo.com/framework/storage)
 - **Manifest**: Chrome Extension Manifest V3
@@ -110,6 +112,9 @@ ez-note/
 ├── contents/
 │   └── sidebar.tsx          # Main sidebar component
 ├── background.ts            # Background service worker
+├── style.css                # Tailwind CSS styles
+├── tailwind.config.js       # Tailwind CSS config
+├── postcss.config.js        # PostCSS config
 ├── assets/
 │   └── icon.png            # Extension icon
 ├── package.json            # Project config & manifest overrides
@@ -124,6 +129,8 @@ ez-note/
 ## 📝 Version History
 
 ### v2.0.0 (Current)
+- Migrated to Tailwind CSS for styling
+- Added auto-focus on textarea when sidebar opens
 - Global sidebar with smooth animations
 - Auto-save functionality
 - Copy to clipboard
