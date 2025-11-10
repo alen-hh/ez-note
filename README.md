@@ -2,14 +2,14 @@
 
 A clean, minimal Chrome extension for quick note-taking with a global sidebar that works across all tabs.
 
-![Version](https://img.shields.io/badge/version-2.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)
 ![Manifest](https://img.shields.io/badge/manifest-v3-green.svg)
 
 ## ✨ Features
 
 - **🎯 Global Sidebar** - Persistent note-taking sidebar accessible on any webpage
-- **✍️ Auto-Focus** - Cursor focuses on the textarea when the sidebar opens
-- **💾 Auto-Save** - Notes automatically save to Chrome local storage
+- **💾 Save on Close** - Notes save automatically when you close the sidebar
+- **📏 Character Counter** - Real-time character count with 1000 character limit
 - **📋 Quick Copy** - One-click copy to clipboard with visual feedback
 - **📥 Export** - Export notes as timestamped `.txt` files
 - **⌨️ Keyboard Shortcuts** - Configure custom shortcuts for quick access
@@ -24,9 +24,10 @@ A clean, minimal Chrome extension for quick note-taking with a global sidebar th
 - **Or** use your custom keyboard shortcut (if configured)
 
 ### Take Notes
-- Type directly in the sidebar textarea
-- Notes save automatically as you type
-- Notes persist across all tabs and browser sessions
+- Type directly in the sidebar textarea (up to 1000 characters)
+- Character counter displays in real-time at bottom right
+- Notes save automatically when you close the sidebar
+- Notes persist across browser sessions
 
 ### Copy Notes
 - Click the **Copy** button (blue) to copy all notes to clipboard
@@ -51,8 +52,9 @@ A clean, minimal Chrome extension for quick note-taking with a global sidebar th
 │ Ez Note    [Shortcut]  [✕]     │  ← Header
 ├─────────────────────────────────┤
 │                                 │
-│  Start taking notes...          │  ← Textarea (auto-save)
+│  Start taking notes...          │  ← Textarea (1000 char limit)
 │                                 │
+│                       0/1000    │  ← Character counter
 ├─────────────────────────────────┤
 │    [📋 Copy]  [📥 Export]       │  ← Actions
 └─────────────────────────────────┘
@@ -128,7 +130,14 @@ ez-note/
 
 ## 📝 Version History
 
-### v2.0.1 (Current)
+### v2.1.0 (Current)
+- Changed save behavior: notes now save when sidebar closes (not real-time)
+- Removed auto-focus feature for better UX
+- Added 1000 character limit with real-time counter
+- Fixed bug where sidebar auto-opens in new tabs
+- Improved performance with local state management
+
+### v2.0.1
 - Migrated to Tailwind CSS for styling
 - Added auto-focus on textarea when sidebar opens
 
@@ -164,9 +173,11 @@ None currently! 🎉
 ## 💡 Tips
 
 - Close the sidebar with the **X** button or toggle with the extension icon
-- Sidebar state persists - if you close it, it stays closed until you reopen it
+- Each tab has its own sidebar state - opening a new tab won't auto-open the sidebar
+- Notes save when you close the sidebar, so don't forget to close it to persist your changes
 - Use keyboard shortcuts for the fastest access
 - Notes are stored locally - they won't sync across devices
+- Maximum 1000 characters per note - watch the character counter!
 
 ---
 

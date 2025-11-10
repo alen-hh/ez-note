@@ -1,9 +1,9 @@
 import { Close, Copy as CopyIcon, DownloadOne } from "@icon-park/react"
-import { useStorage } from "@plasmohq/storage/hook"
-import type { PlasmoCSConfig } from "plasmo"
-import { useEffect, useRef, useState } from "react"
-
 import cssText from "data-text:~style.css"
+import type { PlasmoCSConfig } from "plasmo"
+import { useEffect, useState } from "react"
+
+import { useStorage } from "@plasmohq/storage/hook"
 
 export const config: PlasmoCSConfig = {
   matches: ["<all_urls>"]
@@ -17,9 +17,23 @@ export const getStyle = () => {
 
 const Sidebar = () => {
   const [noteContent, setNoteContent] = useStorage<string>("note-content", "")
-  const [isOpen, setIsOpen] = useStorage<boolean>("sidebar-open", false)
+  const [isOpen, setIsOpen] = useState(false)
   const [copySuccess, setCopySuccess] = useState(false)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const [localContent, setLocalContent] = useState("")
+
+  // Load content from storage when sidebar opens
+  useEffect(() => {
+    if (isOpen) {
+      setLocalContent(noteContent || "")
+    }
+  }, [isOpen, noteContent])
+
+  // Save content to storage when sidebar closes
+  useEffect(() => {
+    if (!isOpen && localContent !== noteContent) {
+      setNoteContent(localContent)
+    }
+  }, [isOpen, localContent, noteContent, setNoteContent])
 
   // Listen for messages from background script
   useEffect(() => {
@@ -41,18 +55,9 @@ const Sidebar = () => {
     }
   }, [setIsOpen])
 
-  useEffect(() => {
-    // When the sidebar opens, focus the textarea
-    if (isOpen && textareaRef.current) {
-      textareaRef.current.focus()
-      const textLength = textareaRef.current.value.length
-      textareaRef.current.setSelectionRange(textLength, textLength)
-    }
-  }, [isOpen])
-
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(noteContent || "")
+      await navigator.clipboard.writeText(localContent || "")
       setCopySuccess(true)
       setTimeout(() => setCopySuccess(false), 2000)
     } catch (err) {
@@ -63,7 +68,7 @@ const Sidebar = () => {
   const handleExport = () => {
     const timestamp = Date.now()
     const filename = `ez-note-${timestamp}.txt`
-    const blob = new Blob([noteContent || ""], { type: "text/plain" })
+    const blob = new Blob([localContent || ""], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
     link.href = url
@@ -91,9 +96,7 @@ const Sidebar = () => {
         `}>
         {/* Header */}
         <div className="p-4 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
-          <h2 className="m-0 text-lg font-semibold text-gray-900">
-            Ez Note
-          </h2>
+          <h2 className="m-0 text-lg font-semibold text-gray-900">Ez Note</h2>
           <div className="flex items-center gap-2">
             <button
               onClick={handleOpenShortcuts}
@@ -112,15 +115,20 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* Textarea */}
-        <textarea
-          ref={textareaRef}
-          value={noteContent}
-          onChange={(e) => setNoteContent(e.target.value)}
-          placeholder="Start taking notes..."
-          className="flex-1 p-4 border-none outline-none resize-none 
-                     text-sm leading-relaxed text-gray-700 font-sans"
-        />
+        {/* Textarea with Character Counter */}
+        <div className="flex-1 relative">
+          <textarea
+            value={localContent}
+            onChange={(e) => setLocalContent(e.target.value)}
+            placeholder="Start taking notes..."
+            className="w-full h-full p-4 pb-8 border-none outline-none resize-none 
+                       text-sm leading-relaxed text-gray-700 font-sans"
+            maxLength={1000}
+          />
+          <div className="absolute bottom-2 right-4 text-xs text-gray-400 pointer-events-none select-none">
+            {localContent.length}/1000
+          </div>
+        </div>
 
         {/* Action Buttons */}
         <div className="p-4 border-t border-gray-200 flex gap-2">

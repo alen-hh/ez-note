@@ -1,7 +1,7 @@
 {
   "name": "ez-note",
   "displayName": "Ez Note",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A clean, minimal Chrome extension for quick note-taking with a global sidebar that works across all tabs.",
   "author": "Alen Hu <huhaoyue0220@126.com>",
   "scripts": {
